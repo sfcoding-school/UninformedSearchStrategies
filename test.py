@@ -14,7 +14,7 @@ def creaTavolo():
 def  checkTorre(torreRverse, pesoAttuale):
     if not torreRverse:         											# base case: list is empty
         return True
-    elif torreRverse[0][1] >= pesoAttuale :      
+    elif torreRverse[0][1] >= pesoAttuale :
         return checkTorre(torreRverse[1:], pesoAttuale + torreRverse[0][0]) # recursive case: advance to next element in list
     else:
     	return False
@@ -35,7 +35,7 @@ def creaGoal(mondo):
 	return goalTemp
 
 if __name__ == '__main__':
-	tavolo = creaTavolo() 
+	tavolo = creaTavolo()
 	print "tavolo iniziale: ", tavolo
 	goal = creaGoal(deepcopy(tavolo))
 	print "Gaol finale: ", goal
@@ -76,11 +76,11 @@ if __name__ == '__main__':
 	for x in mondoDiMondi:
 		print x
 
-# uno stato e' formato da {'tavolo': #lista di liste di ogni posizione del tavolo#, 
-#						   'braccioSx': #elemento presente sul braccio sinistro#, 
+# uno stato e' formato da {'tavolo': #lista di liste di ogni posizione del tavolo#,
+#						   'braccioSx': #elemento presente sul braccio sinistro#,
 #						   'braccioDx': #elemento presente sul braccio destro# }
 
-	
+
 	#TEST
 	# torna tutti gli elementi in cima ad ogni posizione del tavolo
 	#for x in goal:
@@ -91,14 +91,3 @@ if __name__ == '__main__':
 	#AfferraDx(X), AfferraSx(X)
 
 	#per mano sx prova Puton(X,Y), per ogni y sul tavolo gia' esistente (con check se la torre si ROMPE), ripeti per mano dx
-
-	#per mano sx prova PutDown(X), ripeti per sx (MOSSA INUTILE SE BRACCIO VUOTO)
-		# if mondo['braccioSx'] != ():
-			# mondo['tavolo'] += [mondo['braccioSx']]
-			# mondo['braccioSx'] = ()
-
-	#per ogni elemento sul tavolo prova ad afferarlo con mano dx AfferraDx(X), ripeti per sx (MOSSA INUTILE SE BRACCIO OCCUPATO)
-		# if mondo['braccioSx'] == ():
-		# 	for x in mondo['tavolo']:
-		#		mondo['braccioSx'] = x[-1]
-		#		x.remove(x[-1])

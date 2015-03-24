@@ -72,15 +72,25 @@ if __name__ == '__main__':
 			mondoDiMondi.append(dict2)
 
 	#per mano sx prova Puton(X,Y), per ogni y sul tavolo gia' esistente (con check se la torre si ROMPE), ripeti per mano dx
-	if mondo['braccioSx']==():
-		for x in xrange(1,len(mondo['tavolo'])):
-			dict2 = deepcopy(mondo)
-			target = dict2['tavolo'][x][-1]
-			checkresult = checkTorre((torre + mondo[x])[::-1], 0)
-			if checkresult:
-				pass
-			else:
-				
+	if mondo['braccioSx']!=():
+		for y in xrange(0,len(mondo['tavolo'])):
+			#se non sorregge il peso non faccio niente, neanche deepcopy
+			checkresult = checkTorre((mondo['tavolo'][y] + mondo['braccioSx'])[::-1], 0)
+			print "checkresult:" + checkresult
+			if checkresult:#appoggio e creo un nuovo stato
+				dict2 = deepcopy(mondo)
+				dict2['braccioSx']=() #la mano si svuota
+				mondoDiMondi.append(dict2)
+
+	if mondo['braccioDx']!=():
+		for y in xrange(0,len(mondo['tavolo'])):
+			#se non sorregge il peso non faccio niente, neanche deepcopy
+			checkresult = checkTorre((mondo['tavolo'][y] + mondo['braccioDx'])[::-1], 0)
+			print "checkresult:" + checkresult
+			if checkresult:#appoggio e creo un nuovo stato
+				dict2 = deepcopy(mondo)
+				dict2['braccioDx']=() #la mano si svuota
+				mondoDiMondi.append(dict2)
 
 	#stampo risultato per controllo
 	print 'mondoDiMondi: '

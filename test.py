@@ -38,7 +38,7 @@ if __name__ == '__main__':
 	tavolo = creaTavolo()
 	print "tavolo iniziale: ", tavolo
 	goal = creaGoal(deepcopy(tavolo))
-	print "Gaol finale: ", goal
+	print "Goal finale: ", goal
 	mondo = {'tavolo': tavolo, 'braccioSx': (), 'braccioDx': ()}
 	print 'mondo: ', mondo
 
@@ -71,6 +71,17 @@ if __name__ == '__main__':
 			dict2['tavolo'][x].remove(dict2['tavolo'][x][-1])
 			mondoDiMondi.append(dict2)
 
+	#per mano sx prova Puton(X,Y), per ogni y sul tavolo gia' esistente (con check se la torre si ROMPE), ripeti per mano dx
+	if mondo['braccioSx']==():
+		for x in xrange(1,len(mondo['tavolo'])):
+			dict2 = deepcopy(mondo)
+			target = dict2['tavolo'][x][-1]
+			checkresult = checkTorre((torre + mondo[x])[::-1], 0)
+			if checkresult:
+				pass
+			else:
+				
+
 	#stampo risultato per controllo
 	print 'mondoDiMondi: '
 	for x in mondoDiMondi:
@@ -90,4 +101,4 @@ if __name__ == '__main__':
 	#Puton(X,Y) metti blocco X su blocco Y, PutDown(X) metti blocco X sul tavolo,
 	#AfferraDx(X), AfferraSx(X)
 
-	#per mano sx prova Puton(X,Y), per ogni y sul tavolo gia' esistente (con check se la torre si ROMPE), ripeti per mano dx
+

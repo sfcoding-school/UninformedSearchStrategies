@@ -63,6 +63,7 @@ if __name__ == '__main__':
 			dict2['braccioSx'] = dict2['tavolo'][x][-1]
 			dict2['tavolo'][x].remove(dict2['tavolo'][x][-1])
 			mondoDiMondi.append(dict2)
+	print mondo['braccioSx']
 	# AfferraDx(X)
 	if mondo['braccioDx'] == ():
 		for x in xrange(0, len(mondo['tavolo'])):
@@ -72,6 +73,7 @@ if __name__ == '__main__':
 			mondoDiMondi.append(dict2)
 
 	#per mano sx prova Puton(X,Y), per ogni y sul tavolo gia' esistente (con check se la torre si ROMPE), ripeti per mano dx
+	print mondo['braccioSx']
 	if mondo['braccioSx']!=():
 		for y in xrange(0,len(mondo['tavolo'])):
 			#se non sorregge il peso non faccio niente, neanche deepcopy

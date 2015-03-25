@@ -25,7 +25,7 @@ def solve_bfs(mondo, goal, fun):
 					if temp!= False:
 						for x in temp:
 							if x not in visited:
-								queue.append([x] + fringe)
+								queue.append([x] + fringe)#FIFO
 						c_gen+=len(temp)
 
 				# temp = putDownDx(head)

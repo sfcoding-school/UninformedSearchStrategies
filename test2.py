@@ -1,6 +1,7 @@
 from random import randint
 from copy import deepcopy
 from dfs import *
+from bfs import *
 
 numeroBlocchi = 4 #da mettere poi random, iniziamo con 4 per vedere se funzion4a
 
@@ -130,148 +131,6 @@ def checkFinito(head, goal):
 		return True
 	return False
 
-# def solve_dfs(mondo, goal):
-# 	queue=[[mondo]]
-# 	visited=[]
-# 	c_gen=1
-# 	c_vis=0
-# 	c_depth=0
-# 	while True:
-# 		if len(queue)==0:
-# 			print "Depth First Search - Solution: There's no solution"
-# 			print "Depth First Search - Generated Nodes: "+str(c_gen)
-# 			print "Depth First Search - Visited Nodes: "+str(c_vis)
-# 			print "Depth First Search - Max reached depth: "+str(c_depth)
-# 			return []
-# 		else:			
-# 			fringe=queue[0]
-# 			print "STAMPO FRINGE"
-# 			print fringe
-# 			queue=queue[1:] # toglie dalla lista il primo
-# 			head=fringe[0]
-# 			c_vis+=1
-# 			c_depth=max(c_depth,len(fringe))
-# 			visited.append(head)
-# 			print "TEST"
-# 			print "fringe: ", fringe
-# 			print "queue: ", queue
-# 			# print "len queue: ", len(queue)
-# 			# print visited
-# 			print "head: ", head
-# 			print "END TEST"
-# 			raw_input("")
-# 			if checkFinito(head, goal):
-# 				print "Depth First Search - Solution: "
-# 				print fringe[::-1]
-# 				print "Depth First Search - Generated Nodes: "+str(c_gen)
-# 				print "Depth First Search - Visited Nodes: "+str(c_vis)
-# 				print "Depth First Search - Max reached depth: "+str(c_depth)
-# 				return fringe[::-1]
-# 			else:
-# 				temp = putDownDx(head)
-# 				if temp!=False and temp not in visited:
-# 					queue=[temp+fringe]+queue
-# 					c_gen+=1
-
-# 				temp = putDownSx(head)
-# 				if temp!=False and temp not in visited:
-# 					queue=[temp+fringe]+queue
-# 					c_gen+=1
-
-# 				temp = afferraSx(head)
-# 				if temp!=False and temp not in visited:
-# 					queue=[temp+fringe]+queue
-# 					c_gen+=1
-
-# 				temp = afferraDx(head)
-# 				if temp!=False and temp not in visited:
-# 					queue=[temp+fringe]+queue
-# 					c_gen+=1
-
-# 				temp = putOnDx(head)
-# 				if temp!=False and temp not in visited:
-# 					queue=[temp+fringe]+queue
-# 					c_gen+=1
-
-# 				temp = putOnSx(head)
-# 				if temp!=False and temp not in visited:
-# 					queue=[temp+fringe]+queue
-# 					c_gen+=1
-# 				print "stampo coda alla fine if "
-# 				for x in queue:
-# 					print x
-# 				print "len queue: ", len(queue)
-
-# def solve_dfs2(mondo, goal):
-# 	queue=[[mondo]]
-# 	visited=[]
-# 	c_gen=1
-# 	c_vis=0
-# 	c_depth=0
-# 	while True:
-# 		if len(queue)==0:
-# 			print "Depth First Search - Solution: There's no solution"
-# 			return []
-# 		else:			
-# 			fringe=queue[0]
-# 			queue=queue[1:] # toglie dalla lista il primo
-# 			head=fringe[0]
-# 			c_vis+=1
-# 			c_depth=max(c_depth,len(fringe))
-# 			visited.append(head)
-# 			if checkFinito(head, goal):
-# 				print "Depth First Search - Solution: "
-# 				print fringe[::-1]
-# 				return fringe[::-1]
-# 			else:
-# 				temp = putDownDx(head)
-# 				if temp!= False:
-# 					for x in temp:
-# 						if x not in visited:
-# 							queue.insert(0, [x] + fringe)
-# 					c_gen+=len(temp)
-
-# 				temp = putDownSx(head)
-# 				if temp!= False:
-# 					for x in temp:
-# 						if x not in visited:
-# 							queue.insert(0, [x] + fringe)
-# 					c_gen+=len(temp)
-
-# 				temp = afferraSx(head)
-# 				if temp!= False:
-# 					for x in temp:
-# 						if x not in visited:
-# 							queue.insert(0, [x] + fringe)
-# 					c_gen+=len(temp)
-
-# 				temp = afferraDx(head)
-# 				if temp!= False:
-# 					for x in temp:
-# 						if x not in visited:
-# 							queue.insert(0, [x] + fringe)
-# 					c_gen+=len(temp)
-
-# 				temp = putOnDx(head)
-# 				if temp!= False:
-# 					for x in temp:
-# 						if x not in visited:
-# 							queue.insert(0, [x] + fringe)
-# 					c_gen+=len(temp)
-
-# 				temp = putOnSx(head)
-# 				if temp!= False:
-# 					for x in temp:
-# 						if x not in visited:
-# 							queue.insert(0, [x] + fringe)
-# 					c_gen+=len(temp)
-
-# 				# print "stampo coda alla fine if "
-# 				# for x in queue:
-# 				# 	print x
-# 				# print "len queue: ", len(queue)
-# 				#raw_input("")
-
 if __name__ == '__main__':
 	tavolo = creaTavolo()
 	print "tavolo iniziale: ", tavolo
@@ -282,19 +141,9 @@ if __name__ == '__main__':
 	print
 	print "TEST DFS"
 	solve_dfs2(mondo, goal, [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx])
+	print "TEST BFS"
+	solve_bfs(mondo, goal, [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx])
 
 # uno stato e' formato da {'tavolo': #lista di liste di ogni posizione del tavolo#,
 #						   'braccioSx': #elemento presente sul braccio sinistro#,
 #						   'braccioDx': #elemento presente sul braccio destro# }
-
-
-	#TEST
-	# torna tutti gli elementi in cima ad ogni posizione del tavolo
-	#for x in goal:
-	#	print x[-1]
-
-	#MOSSE POSSIBILI
-	#Puton(X,Y) metti blocco X su blocco Y, PutDown(X) metti blocco X sul tavolo,
-	#AfferraDx(X), AfferraSx(X)
-
-	#per mano sx prova Puton(X,Y), per ogni y sul tavolo gia' esistente (con check se la torre si ROMPE), ripeti per mano dx

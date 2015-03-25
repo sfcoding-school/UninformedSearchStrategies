@@ -1,6 +1,6 @@
-from test2 import checkFinito
+from funzioniSupportoMondoBlocchi import checkFinito
 
-def solve_bfs(mondo, goal, fun):
+def solve_bfs(mondo, goal, funzioniSuccessori):
 	queue=[[mondo]]
 	visited=[]
 	c_gen=1
@@ -22,13 +22,13 @@ def solve_bfs(mondo, goal, fun):
 				print fringe[::-1]
 				return fringe[::-1]
 			else:
-				for f in fun:
-					temp = f(head)
-					if temp!= False:
-						for x in temp:
-							if x not in visited:
-								queue.append([x] + fringe)#FIFO
-						c_gen+=len(temp)
+				for function in funzioniSuccessori:
+					nodiSuccessori = function(head)
+					if nodiSuccessori != False: # se uguale a False quella mossa non era possibile
+						for successore in nodiSuccessori:
+							if successore not in visited:
+								queue.append([successore] + fringe)
+						c_gen+=len(nodiSuccessori)
 
 				# temp = putDownDx(head)
 				# if temp!= False:

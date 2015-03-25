@@ -1,11 +1,7 @@
 from random import randint
 from copy import deepcopy
-#from dfs import *
-from bfs import *
 
-numeroBlocchi = 4 #da mettere poi random, iniziamo con 4 per vedere se funzion4a
-
-def creaTavolo():
+def creaTavolo(numeroBlocchi):
 	tavoloTemp = []
 	for x in xrange(0,numeroBlocchi):
 		tavoloTemp.append([(randint(1,9), randint(1,20))]) # coppia p_i (peso), M_i (quanto puo' reggere)
@@ -22,7 +18,7 @@ def  checkTorre(torreRverse, pesoAttuale):
     	return False
 
 # da ricontrollare
-def creaGoal(mondo):
+def creaGoal(mondo, numeroBlocchi):
 	goalTemp = []
 	pesoAttuale = 0
 	torre = []
@@ -130,20 +126,3 @@ def checkFinito(head, goal):
 	if head['tavolo'] == goal:
 		return True
 	return False
-
-if __name__ == '__main__':
-	tavolo = creaTavolo()
-	print "tavolo iniziale: ", tavolo
-	goal = creaGoal(deepcopy(tavolo))
-	print "Gaol finale: ", goal
-	mondo = {'tavolo': tavolo, 'braccioSx': (), 'braccioDx': ()}
-	print 'mondo: ', mondo
-	print
-	print "TEST DFS"
-	#solve_dfs2(mondo, goal, [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx])
-	print "TEST BFS"
-	solve_bfs(mondo, goal, [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx])
-
-# uno stato e' formato da {'tavolo': #lista di liste di ogni posizione del tavolo#,
-#						   'braccioSx': #elemento presente sul braccio sinistro#,
-#						   'braccioDx': #elemento presente sul braccio destro# }

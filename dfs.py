@@ -1,6 +1,6 @@
-import test2
+from funzioniSupportoMondoBlocchi import checkFinito
 
-def solve_dfs2(mondo, goal, fun):
+def solve_dfs(mondo, goal, funzioniSuccessori):
 	queue=[[mondo]]
 	visited=[]
 	c_gen=1
@@ -9,6 +9,9 @@ def solve_dfs2(mondo, goal, fun):
 	while True:
 		if len(queue)==0:
 			print "Depth First Search - Solution: There's no solution"
+			print "Depth First Search - Generated Nodes: ", c_gen
+			print "Depth First Search - Visited Nodes: ", c_vis
+			print "Depth First Search - Max reached depth: ", c_depth
 			return []
 		else:			
 			fringe=queue[0]
@@ -20,54 +23,15 @@ def solve_dfs2(mondo, goal, fun):
 			if checkFinito(head, goal):
 				print "Depth First Search - Solution: "
 				print fringe[::-1]
+				print "Depth First Search - Generated Nodes: ", c_gen
+				print "Depth First Search - Visited Nodes: ", c_vis
+				print "Depth First Search - Max reached depth: ", c_depth
 				return fringe[::-1]
 			else:
-				for f in fun:
-					temp = f(head)
-					if temp!= False:
-						for x in temp:
-							if x not in visited:
-								queue.insert(0, [x] + fringe)
-						c_gen+=len(temp)
-
-				# temp = putDownDx(head)
-				# if temp!= False:
-				# 	for x in temp:
-				# 		if x not in visited:
-				# 			queue.insert(0, [x] + fringe)
-				# 	c_gen+=len(temp)
-
-				# temp = putDownSx(head)
-				# if temp!= False:
-				# 	for x in temp:
-				# 		if x not in visited:
-				# 			queue.insert(0, [x] + fringe)
-				# 	c_gen+=len(temp)
-
-				# temp = afferraSx(head)
-				# if temp!= False:
-				# 	for x in temp:
-				# 		if x not in visited:
-				# 			queue.insert(0, [x] + fringe)
-				# 	c_gen+=len(temp)
-
-				# temp = afferraDx(head)
-				# if temp!= False:
-				# 	for x in temp:
-				# 		if x not in visited:
-				# 			queue.insert(0, [x] + fringe)
-				# 	c_gen+=len(temp)
-
-				# temp = putOnDx(head)
-				# if temp!= False:
-				# 	for x in temp:
-				# 		if x not in visited:
-				# 			queue.insert(0, [x] + fringe)
-				# 	c_gen+=len(temp)
-
-				# temp = putOnSx(head)
-				# if temp!= False:
-				# 	for x in temp:
-				# 		if x not in visited:
-				# 			queue.insert(0, [x] + fringe)
-				# 	c_gen+=len(temp)
+				for function in funzioniSuccessori:
+					nodiSuccessori = function(head)
+					if nodiSuccessori != False: # se uguale a False quella mossa non era possibile
+						for successore in nodiSuccessori:
+							if successore not in visited:
+								queue.insert(0, [successore] + fringe)
+						c_gen+=len(nodiSuccessori)

@@ -41,6 +41,7 @@ def putDownDx(mondo):
 		dict2 = deepcopy(mondo)
 		dict2['tavolo'].append([dict2['braccioSx']])
 		dict2['braccioSx'] = ()
+		print "putDownDx:", dict2
 		return [dict2]
 	else:
 		return False
@@ -51,6 +52,7 @@ def putDownSx(mondo):
 		dict2 = deepcopy(mondo)
 		dict2['tavolo'].append([dict2['braccioDx']])
 		dict2['braccioDx'] = ()
+		print "putDownSx:", dict2
 		return [dict2]
 	else:
 		return False
@@ -62,8 +64,12 @@ def afferraSx(mondo):
 		for x in xrange(0, len(mondo['tavolo'])):
 			dict2 = deepcopy(mondo)
 			dict2['braccioSx'] = dict2['tavolo'][x][-1]
-			dict2['tavolo'][x].remove(dict2['tavolo'][x][-1])
+			if len(dict2['tavolo'][x]) == 1: #se era da solo rimuovere lista
+				dict2['tavolo'].remove(dict2['tavolo'][x])
+			else:
+				dict2['tavolo'][x].remove(dict2['tavolo'][x][-1])
 			generati.append(dict2)
+		print "afferraSx: ", generati
 		return generati
 	else:
 		return False
@@ -74,8 +80,12 @@ def afferraDx(mondo):
 		for x in xrange(0, len(mondo['tavolo'])):
 			dict2 = deepcopy(mondo)
 			dict2['braccioDx'] = dict2['tavolo'][x][-1]
-			dict2['tavolo'][x].remove(dict2['tavolo'][x][-1])
+			if len(dict2['tavolo'][x]) == 1: #se era da solo rimuovere lista
+				dict2['tavolo'].remove(dict2['tavolo'][x])
+			else:
+				dict2['tavolo'][x].remove(dict2['tavolo'][x][-1])
 			generati.append(dict2)
+		print "afferraDx: ", generati
 		return generati
 	else:
 		return False
@@ -85,12 +95,13 @@ def putOnSx(mondo):
 	if mondo['braccioSx']!=():
 			for y in xrange(0,len(mondo['tavolo'])):
 				#se non sorregge il peso non faccio niente, neanche deepcopy
-				checkresult = checkTorre((mondo['tavolo'][y] + mondo['braccioSx'])[::-1], 0)
-				print "checkresult:" + checkresult
+				checkresult = checkTorre((mondo['tavolo'][y] + [mondo['braccioSx']])[::-1], 0) #checkTorre((torre + mondo[x])[::-1], 0):
+				#print "checkresult:" + checkresult
 				if checkresult:#appoggio e creo un nuovo stato
 					dict2 = deepcopy(mondo)
 					dict2['braccioSx']=() #la mano si svuota
 					generati.append(dict2)
+			print "putOnSx: ", generati
 			return generati
 	else:
 		return False
@@ -100,12 +111,13 @@ def putOnDx(mondo):
 	if mondo['braccioDx']!=():
 		for y in xrange(0,len(mondo['tavolo'])):
 			#se non sorregge il peso non faccio niente, neanche deepcopy
-			checkresult = checkTorre((mondo['tavolo'][y] + mondo['braccioDx'])[::-1], 0)
-			print "checkresult:" + checkresult
+			checkresult = checkTorre((mondo['tavolo'][y] + [mondo['braccioDx']])[::-1], 0)
+			#print "checkresult:", checkresult
 			if checkresult:#appoggio e creo un nuovo stato
 				dict2 = deepcopy(mondo)
 				dict2['braccioDx']=() #la mano si svuota
 				generati.append(dict2)
+		print "putOnDx: ", generati
 		return generati
 	else:
 		return False
@@ -115,7 +127,6 @@ def checkFinito(head, goal):
 		return True
 	return False
 
-# va in loop (credo) anche con solo due elementi, qualcosa non torna
 def solve_dfs(mondo, goal):
 	queue=[[mondo]]
 	visited=[]
@@ -129,13 +140,23 @@ def solve_dfs(mondo, goal):
 			print "Depth First Search - Visited Nodes: "+str(c_vis)
 			print "Depth First Search - Max reached depth: "+str(c_depth)
 			return []
-		else:
+		else:			
 			fringe=queue[0]
-			queue=queue[1:]
+			print "STAMPO FRINGE"
+			print fringe
+			queue=queue[1:] # toglie dalla lista il primo
 			head=fringe[0]
 			c_vis+=1
 			c_depth=max(c_depth,len(fringe))
 			visited.append(head)
+			print "TEST"
+			print "fringe: ", fringe
+			print "queue: ", queue
+			# print "len queue: ", len(queue)
+			# print visited
+			print "head: ", head
+			print "END TEST"
+			raw_input("")
 			if checkFinito(head, goal):
 				print "Depth First Search - Solution: "
 				print fringe[::-1]
@@ -144,35 +165,109 @@ def solve_dfs(mondo, goal):
 				print "Depth First Search - Max reached depth: "+str(c_depth)
 				return fringe[::-1]
 			else:
-				temp = putDownDx(mondo)
+				temp = putDownDx(head)
 				if temp!=False and temp not in visited:
 					queue=[temp+fringe]+queue
 					c_gen+=1
 
-				temp = putDownSx(mondo)
+				temp = putDownSx(head)
 				if temp!=False and temp not in visited:
 					queue=[temp+fringe]+queue
 					c_gen+=1
 
-				temp = afferraSx(mondo)
+				temp = afferraSx(head)
 				if temp!=False and temp not in visited:
 					queue=[temp+fringe]+queue
 					c_gen+=1
 
-				temp = afferraDx(mondo)
+				temp = afferraDx(head)
 				if temp!=False and temp not in visited:
 					queue=[temp+fringe]+queue
 					c_gen+=1
 
-				temp = putOnDx(mondo)
+				temp = putOnDx(head)
 				if temp!=False and temp not in visited:
 					queue=[temp+fringe]+queue
 					c_gen+=1
 
-				temp = putOnSx(mondo)
+				temp = putOnSx(head)
 				if temp!=False and temp not in visited:
 					queue=[temp+fringe]+queue
 					c_gen+=1
+				print "stampo coda alla fine if "
+				for x in queue:
+					print x
+				print "len queue: ", len(queue)
+
+def solve_dfs2(mondo, goal):
+	queue=[[mondo]]
+	visited=[]
+	c_gen=1
+	c_vis=0
+	c_depth=0
+	while True:
+		if len(queue)==0:
+			print "Depth First Search - Solution: There's no solution"
+			return []
+		else:			
+			fringe=queue[0]
+			queue=queue[1:] # toglie dalla lista il primo
+			head=fringe[0]
+			c_vis+=1
+			c_depth=max(c_depth,len(fringe))
+			visited.append(head)
+			if checkFinito(head, goal):
+				print "Depth First Search - Solution: "
+				print fringe[::-1]
+				return fringe[::-1]
+			else:
+				temp = putDownDx(head)
+				if temp!= False:
+					for x in temp:
+						if x not in visited:
+							queue.insert(0, [x] + fringe)
+					c_gen+=len(temp)
+
+				temp = putDownSx(head)
+				if temp!= False:
+					for x in temp:
+						if x not in visited:
+							queue.insert(0, [x] + fringe)
+					c_gen+=len(temp)
+
+				temp = afferraSx(head)
+				if temp!= False:
+					for x in temp:
+						if x not in visited:
+							queue.insert(0, [x] + fringe)
+					c_gen+=len(temp)
+
+				temp = afferraDx(head)
+				if temp!= False:
+					for x in temp:
+						if x not in visited:
+							queue.insert(0, [x] + fringe)
+					c_gen+=len(temp)
+
+				temp = putOnDx(head)
+				if temp!= False:
+					for x in temp:
+						if x not in visited:
+							queue.insert(0, [x] + fringe)
+					c_gen+=len(temp)
+
+				temp = putOnSx(head)
+				if temp!= False:
+					for x in temp:
+						if x not in visited:
+							queue.insert(0, [x] + fringe)
+					c_gen+=len(temp)
+
+				print "stampo coda alla fine if "
+				for x in queue:
+					print x
+				print "len queue: ", len(queue)
+				raw_input("")
 
 if __name__ == '__main__':
 	tavolo = creaTavolo()
@@ -183,7 +278,7 @@ if __name__ == '__main__':
 	print 'mondo: ', mondo
 	print
 	print "TEST DFS"
-	solve_dfs(mondo, goal)
+	solve_dfs2(mondo, goal)
 
 # uno stato e' formato da {'tavolo': #lista di liste di ogni posizione del tavolo#,
 #						   'braccioSx': #elemento presente sul braccio sinistro#,

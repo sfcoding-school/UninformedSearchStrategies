@@ -9,6 +9,9 @@ def solve_bfs(mondo, goal, funzioniSuccessori):
 	while True:
 		if len(queue)==0:
 			print "BFS, nessuna soluzione"
+			print "BFS - Generated Nodes: ", c_gen
+			print "BFS - Visited Nodes: ", c_vis
+			print "BFS - Max reached depth: ", c_depth
 			return []
 		else:			
 			fringe=queue[0]
@@ -20,6 +23,9 @@ def solve_bfs(mondo, goal, funzioniSuccessori):
 			if checkFinito(head, goal):
 				print "BFS - SOLUZIONE: "
 				print fringe[::-1]
+				print "BFS - Generated Nodes: ", c_gen
+				print "BFS - Visited Nodes: ", c_vis
+				print "BFS - Max reached depth: ", c_depth
 				return fringe[::-1]
 			else:
 				for function in funzioniSuccessori:
@@ -29,45 +35,3 @@ def solve_bfs(mondo, goal, funzioniSuccessori):
 							if successore not in visited:
 								queue.append([successore] + fringe)
 						c_gen+=len(nodiSuccessori)
-
-				# temp = putDownDx(head)
-				# if temp!= False:
-				# 	for x in temp:
-				# 		if x not in visited:
-				# 			queue.insert(0, [x] + fringe)
-				# 	c_gen+=len(temp)
-
-				# temp = putDownSx(head)
-				# if temp!= False:
-				# 	for x in temp:
-				# 		if x not in visited:
-				# 			queue.insert(0, [x] + fringe)
-				# 	c_gen+=len(temp)
-
-				# temp = afferraSx(head)
-				# if temp!= False:
-				# 	for x in temp:
-				# 		if x not in visited:
-				# 			queue.insert(0, [x] + fringe)
-				# 	c_gen+=len(temp)
-
-				# temp = afferraDx(head)
-				# if temp!= False:
-				# 	for x in temp:
-				# 		if x not in visited:
-				# 			queue.insert(0, [x] + fringe)
-				# 	c_gen+=len(temp)
-
-				# temp = putOnDx(head)
-				# if temp!= False:
-				# 	for x in temp:
-				# 		if x not in visited:
-				# 			queue.insert(0, [x] + fringe)
-				# 	c_gen+=len(temp)
-
-				# temp = putOnSx(head)
-				# if temp!= False:
-				# 	for x in temp:
-				# 		if x not in visited:
-				# 			queue.insert(0, [x] + fringe)
-				# 	c_gen+=len(temp)

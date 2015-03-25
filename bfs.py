@@ -1,3 +1,5 @@
+from test2 import checkFinito
+
 def solve_bfs(mondo, goal, fun):
 	queue=[[mondo]]
 	visited=[]

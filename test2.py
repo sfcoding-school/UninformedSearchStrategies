@@ -1,6 +1,6 @@
 from random import randint
 from copy import deepcopy
-from dfs import *
+#from dfs import *
 from bfs import *
 
 numeroBlocchi = 4 #da mettere poi random, iniziamo con 4 per vedere se funzion4a
@@ -140,7 +140,7 @@ if __name__ == '__main__':
 	print 'mondo: ', mondo
 	print
 	print "TEST DFS"
-	solve_dfs2(mondo, goal, [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx])
+	#solve_dfs2(mondo, goal, [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx])
 	print "TEST BFS"
 	solve_bfs(mondo, goal, [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx])
 

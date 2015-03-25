@@ -1,4 +1,5 @@
-from funzioniSupportoMondoBlocchi import checkFinito
+from mondoDeiBlocchi.funzioniSupportoMondoBlocchi import checkFinito
+
 def sort(queue):
     for i in range(0,len(queue)-1):
         for j in range(0,len(queue)-i-1):

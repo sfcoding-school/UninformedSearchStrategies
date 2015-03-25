@@ -1,4 +1,4 @@
-from funzioniSupportoMondoBlocchi import checkFinito
+from mondoDeiBlocchi.funzioniSupportoMondoBlocchi import checkFinito
 
 def solve_dfs(mondo, goal, funzioniSuccessori):
 	queue=[[mondo]]

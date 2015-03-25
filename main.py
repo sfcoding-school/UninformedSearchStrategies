@@ -1,8 +1,8 @@
-from funzioniSupportoMondoBlocchi import *
-from dfs import solve_dfs
-from bfs import solve_bfs
-from deepening import solve_deepening
-from uniform import solve_ucs
+from mondoDeiBlocchi.funzioniSupportoMondoBlocchi import *
+from algoritmi.dfs import solve_dfs
+from algoritmi.bfs import solve_bfs
+from algoritmi.deepening import solve_deepening
+from algoritmi.uniform import solve_ucs
 
 numeroBlocchi = 4 #da mettere poi random, iniziamo con 4 per vedere se funzion4a
 
@@ -15,11 +15,11 @@ if __name__ == '__main__':
 	print 'mondo: ', mondo
 	print
 	print "TEST DFS"
-	#solve_dfs(mondo, goal, [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx])
+	solve_dfs(mondo, goal, [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx])
 	print "TEST BFS"
-	#solve_bfs(mondo, goal, [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx])
+	solve_bfs(mondo, goal, [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx])
 	print "TEST DEEPENING"
-	#solve_deepening(mondo, goal, [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx])
+	solve_deepening(mondo, goal, [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx])
 	print "TEST UCS"
 	costi = (8,8,4,4,2,2)#COSTI(putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx)
 	solve_ucs(mondo,goal,costi,[putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx])

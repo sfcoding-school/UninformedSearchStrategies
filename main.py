@@ -5,7 +5,7 @@ from algoritmi.bfs import solve_bfs
 from algoritmi.deepening import solve_deepening
 from algoritmi.uniform import solve_ucs
 
-numeroBlocchi = 4 #da mettere poi random, iniziamo con 4 per vedere se funziona
+numeroBlocchi = 2 #da mettere poi random, iniziamo con 4 per vedere se funziona
 
 if __name__ == '__main__':
 	print "################## Mondo dei Blocchi ##########################"
@@ -13,22 +13,22 @@ if __name__ == '__main__':
 	#						   'braccioSx': #elemento presente sul braccio sinistro#,
 	#						   'braccioDx': #elemento presente sul braccio destro# }
 	tavolo = creaTavolo(numeroBlocchi)
-	print "tavolo iniziale: ", tavolo
+	print "Tavolo iniziale: ", tavolo
 	goal = creaGoal(deepcopy(tavolo), numeroBlocchi)
-	print "goal finale: ", goal
+	print "Goal finale: ", goal
 	mondo = {'tavolo': tavolo, 'braccioSx': (), 'braccioDx': ()}
-	print 'mondo: ', mondo
+	# print 'mondo: ', mondo
 	print
 	funzSuccessori = [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx]
 	print "TEST DFS"
-	solve_dfs(mondo, checkFinito, goal, funzSuccessori)
+	print solve_dfs(mondo, checkFinito, goal, funzSuccessori)
 	print "TEST BFS"
-	solve_bfs(mondo, checkFinito, goal, funzSuccessori)
+	print solve_bfs(mondo, checkFinito, goal, funzSuccessori)
 	print "TEST DEEPENING"
-	solve_deepening(mondo, checkFinito, goal, funzSuccessori)
+	print solve_deepening(mondo, checkFinito, goal, funzSuccessori)
 	print "TEST UCS"
-	costi = (8,8,4,4,2,2)#COSTI(putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx)
-	solve_ucs(mondo, checkFinito, goal, costi, funzSuccessori)
+	costi = (8,8,4,4,2,2) #COSTI(putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx)
+	print solve_ucs(mondo, checkFinito, goal, costi, funzSuccessori)
 
 	# TEST SOLITARIO CINESE
 	print
@@ -52,11 +52,11 @@ if __name__ == '__main__':
 
 	print "TEST DFS"
 	funzSuccessori = [move_down, move_up, move_left, move_right]
-	solve_dfs(game_e1, checkFinitoSolitario, goalSC, funzSuccessori)
+	print_sol(solve_dfs(game_e1, checkFinitoSolitario, goalSC, funzSuccessori))
 	print "TEST BFS"
-	solve_bfs(game_e1, checkFinitoSolitario, goalSC, funzSuccessori)
+	print_sol(solve_bfs(game_e1, checkFinitoSolitario, goalSC, funzSuccessori))
 	print "TEST DEEPENING"
-	solve_deepening(game_e1, checkFinitoSolitario, goalSC, funzSuccessori)
+	print_sol(solve_deepening(game_e1, checkFinitoSolitario, goalSC, funzSuccessori))
 	print "TEST UCS"
 	costi = (1,3,2,0)
-	solve_ucs(game_e1, checkFinitoSolitario, goalSC, costi, funzSuccessori)
+	print_sol(solve_ucs(game_e1, checkFinitoSolitario, goalSC, costi, funzSuccessori))

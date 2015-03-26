@@ -1,11 +1,3 @@
-def sort(queue):
-    for i in range(0, len(queue)-1):
-        for j in range(0, len(queue)-i-1):
-            if queue[j][1] > queue[j+1][1]:
-                temp = queue[j]
-                queue[j] = queue[j+1]
-                queue[j+1] = temp
-
 def solve_ucs(mondo, funzControlloGoal, goal, costi, funzioniSuccessori):
     queue = [([mondo],0)]
     visited = []
@@ -31,7 +23,7 @@ def solve_ucs(mondo, funzControlloGoal, goal, costi, funzioniSuccessori):
 				print "UCS - numero di nodi generati: ", c_gen
 				print "UCS - numero di nodi visitati: ", c_vis
 				print "UCS - profondita max raggiunta: ", c_depth
-				return fringe[0][::-1]
+				return fringe[::-1]
 			else:
 				i = 0
 				for function in funzioniSuccessori:
@@ -42,4 +34,39 @@ def solve_ucs(mondo, funzControlloGoal, goal, costi, funzioniSuccessori):
 								queue = [ ( [successore] + fringe[0], costi[i] + fringe[1] ) ] + queue
 						c_gen += len(nodiSuccessori)
 					i += 1
-			sort(queue)
+			heap_sort(queue)
+
+#BUBBLESORT
+def bubble_sort(queue):
+    for i in range(0, len(queue)-1):
+        for j in range(0, len(queue)-i-1):
+            if queue[j][1] > queue[j+1][1]:
+                temp = queue[j]
+                queue[j] = queue[j+1]
+                queue[j+1] = temp
+
+
+#HEAPSORT
+def swap(sqc,i, j):                    
+    sqc[i], sqc[j] = sqc[j], sqc[i] 
+
+def heapify(sqc,end,i):   
+    l=2 * i + 1  
+    r=2 * (i + 1)   
+    max=i   
+    if l < end and sqc[i][0] < sqc[l][0]:   
+        max = l   
+    if r < end and sqc[max][0] < sqc[r][0]:   
+        max = r   
+    if max != i:   
+        swap(sqc,i, max)   
+        heapify(sqc,end, max)   
+
+def heap_sort(sqc):     
+    end = len(sqc)   
+    start = end / 2 - 1
+    for i in range(start, -1, -1):   
+        heapify(sqc,end, i)   
+    for i in range(end-1, 0, -1):   
+        swap(sqc,i, 0)   
+        heapify(sqc,i, 0)

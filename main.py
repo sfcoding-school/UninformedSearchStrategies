@@ -5,9 +5,13 @@ from algoritmi.bfs import solve_bfs
 from algoritmi.deepening import solve_deepening
 from algoritmi.uniform import solve_ucs
 
-numeroBlocchi = 2 #da mettere poi random, iniziamo con 4 per vedere se funziona
+numeroBlocchi = 4 #da mettere poi random, iniziamo con 4 per vedere se funziona
 
 if __name__ == '__main__':
+	print "################## Mondo dei Blocchi ##########################"
+	# uno stato e' formato da {'tavolo': #lista di liste di ogni posizione del tavolo#,
+	#						   'braccioSx': #elemento presente sul braccio sinistro#,
+	#						   'braccioDx': #elemento presente sul braccio destro# }
 	tavolo = creaTavolo(numeroBlocchi)
 	print "tavolo iniziale: ", tavolo
 	goal = creaGoal(deepcopy(tavolo), numeroBlocchi)
@@ -16,7 +20,6 @@ if __name__ == '__main__':
 	print 'mondo: ', mondo
 	print
 	funzSuccessori = [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx]
-	print "################## Mondo dei Blocchi ##########################"
 	print "TEST DFS"
 	solve_dfs(mondo, checkFinito, goal, funzSuccessori)
 	print "TEST BFS"
@@ -28,6 +31,8 @@ if __name__ == '__main__':
 	solve_ucs(mondo, checkFinito, goal, costi, funzSuccessori)
 
 	# TEST SOLITARIO CINESE
+	print
+	print "################## Solitario Cinese ##########################"
 
 	game_e1=[[" "," ",1,1,0," "," "],
 			[" "," ",0,1,1," "," "],
@@ -45,8 +50,6 @@ if __name__ == '__main__':
 			[" "," ",0,0,0," "," "],
 			[" "," ",0,0,0," "," "]]
 
-	print
-	print "################## Solitario Cinese ##########################"
 	print "TEST DFS"
 	funzSuccessori = [move_down, move_up, move_left, move_right]
 	solve_dfs(game_e1, checkFinitoSolitario, goalSC, funzSuccessori)
@@ -57,7 +60,3 @@ if __name__ == '__main__':
 	print "TEST UCS"
 	costi = (1,3,2,0)
 	solve_ucs(game_e1, checkFinitoSolitario, goalSC, costi, funzSuccessori)
-
-# uno stato e' formato da {'tavolo': #lista di liste di ogni posizione del tavolo#,
-#						   'braccioSx': #elemento presente sul braccio sinistro#,
-#						   'braccioDx': #elemento presente sul braccio destro# }

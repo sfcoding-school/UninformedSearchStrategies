@@ -18,7 +18,7 @@ def solve_deepening(mondo, funzControlloGoal, goal, funzioniSuccessori):
 			c_depth=max(c_depth,len(fringe))
 			visited.append(head)
 			if funzControlloGoal(head, goal):
-				print "Iterative Deepening - Solution: "
+				print "Iterative Deepening - SOLUZIONE: "
 				print fringe[::-1]
 				print "Iterative Deepening - Generated Nodes: ", c_gen
 				print "Iterative Deepening - Visited Nodes: ", c_vis
@@ -36,7 +36,7 @@ def solve_deepening(mondo, funzControlloGoal, goal, funzioniSuccessori):
 								else:
 									go_on=True
         if not go_on:
-			print "Iterative Deepening - Solution: There's no solution"
+			print "Iterative Deepening - SOLUZIONE: There's no solution"
 			print "Iterative Deepening - Generated Nodes: ", c_gen
 			print "Iterative Deepening - Visited Nodes: ", c_vis
 			print "Iterative Deepening - Max reached depth: ", c_depth

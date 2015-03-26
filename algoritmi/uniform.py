@@ -1,4 +1,4 @@
-from mondoDeiBlocchi.funzioniSupportoMondoBlocchi import checkFinito
+#from mondoDeiBlocchi.funzioniSupportoMondoBlocchi import checkFinito
 
 def sort(queue):
     for i in range(0,len(queue)-1):
@@ -8,7 +8,7 @@ def sort(queue):
                 queue[j]=queue[j+1]
                 queue[j+1]=temp
 
-def solve_ucs(mondo,goal,costi,funzioniSuccessori):
+def solve_ucs(mondo, funzControlloGoal, goal, costi, funzioniSuccessori):
     queue=[([mondo],0)]
     visited=[]
     c_gen=1
@@ -28,7 +28,7 @@ def solve_ucs(mondo,goal,costi,funzioniSuccessori):
 			c_vis+=1
 			c_depth=max(c_depth,len(fringe))
 			visited.append(head)
-			if checkFinito(head, goal):
+			if funzControlloGoal(head, goal):
 				print "UCS - SOLUZIONE: "
 				print fringe[0][::-1]
 				print "UCS - Generated Nodes: ", c_gen

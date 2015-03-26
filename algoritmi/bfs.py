@@ -1,6 +1,6 @@
-from mondoDeiBlocchi.funzioniSupportoMondoBlocchi import checkFinito
+# from mondoDeiBlocchi.funzioniSupportoMondoBlocchi import checkFinito
 
-def solve_bfs(mondo, goal, funzioniSuccessori):
+def solve_bfs(mondo, funzControlloGoal, goal, funzioniSuccessori):
 	queue=[[mondo]]
 	visited=[]
 	c_gen=1
@@ -20,7 +20,7 @@ def solve_bfs(mondo, goal, funzioniSuccessori):
 			c_vis+=1
 			c_depth=max(c_depth,len(fringe))
 			visited.append(head)
-			if checkFinito(head, goal):
+			if funzControlloGoal(head, goal):
 				print "BFS - SOLUZIONE: "
 				print fringe[::-1]
 				print "BFS - Generated Nodes: ", c_gen

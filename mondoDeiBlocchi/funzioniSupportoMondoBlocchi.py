@@ -103,7 +103,6 @@ def putOnDx(mondo):
 		for y in xrange(0, len(mondo['tavolo'])):
 			#se non sorregge il peso non faccio niente, neanche deepcopy
 			checkresult = checkTorre((mondo['tavolo'][y] + [mondo['braccioDx']])[::-1], 0)
-			#print "checkresult:", checkresult
 			if checkresult: #appoggio e creo un nuovo stato
 				dict2 = deepcopy(mondo)
 				dict2['tavolo'][y].append(mondo['braccioDx'])

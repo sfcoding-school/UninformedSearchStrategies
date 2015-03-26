@@ -23,7 +23,7 @@ def solve_ucs(mondo, funzControlloGoal, goal, costi, funzioniSuccessori):
 				print "UCS - numero di nodi generati: ", c_gen
 				print "UCS - numero di nodi visitati: ", c_vis
 				print "UCS - profondita max raggiunta: ", c_depth
-				return fringe[::-1]
+				return fringe[0][::-1]
 			else:
 				i = 0
 				for function in funzioniSuccessori:

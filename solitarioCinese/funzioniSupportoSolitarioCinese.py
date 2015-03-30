@@ -5,9 +5,9 @@ def checkFinitoSolitario(head, goal):
         return True
     return False
         
-# Quattro funzioni che definiscono le possibili mosse.
-# Controllo prima di non sforare la scacchiera, poi
-# se la mossa e' corretta (e quindi mangio un pezzo).
+#MOSSE POSSIBILI
+# viene controllata per ogni zona della scacchiera se e' possibile la mossa e in caso si crea un nuovo stato
+# e lo si attacca alla lista 'generati' che verra' poi ritornata all'algoritmo in esecuzione
 def move_down(head):
     generati = []
     for x in range(0, len(head)):
@@ -60,7 +60,7 @@ def move_right(head):
                     generati.append(temp)
     return generati
 
-# Funzione che stampa la soluzione passo a passo
+# Funzione che stampa la soluzione
 def print_sol(fringe):
     print
     for i in fringe:

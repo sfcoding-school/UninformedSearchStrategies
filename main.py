@@ -1,4 +1,27 @@
 # -*- coding: latin-1 -*-
+
+#TESTO
+# Esonero n.1 Ricerca nello Spazi degli Stati
+# Il progetto consiste nel realizzare un ambiente in cui venga realizzata la ricerca nello spazio degli stati,
+# per il problema PegSolitarie e per il problema scelto sulla piattaforma estudium e descritto di seguito.
+# Il candidato dovra’ realizzare la ricerca nello spazio degli stati per il problema scelto implementando le
+# seguenti strategie:
+# ricerca in ampiezza
+# ricerca in profondita
+# ricerca approfondimento iterative
+# ricerca a costo uniforme
+# il programma prendera’ in input stato iniziale e goal e dovra’ produrre il piano soluzione (cioe’ la
+# sequenza di azioni) o eventualemente fornire l’indicazione che non esistono soluzioni. Oltre alla
+# soluzione, Si richiedono in output statistiche sull’esecuzione (numero nodi generati, profondita’
+# raggiunta etc.).
+# Il candidato dovra’ provare il programma su piu’ istanze di problema di dimensioni diverse e dovra’
+# essere possibile per il docente modificare stato iniziale e goal. In particolare si richiede: almeno 2
+# problemi con soluzione di lunghezza breve, 1 probema con piano soluzione di lunghezza medio/lunga, 1
+# problema senza soluzioni risolto correttamente.
+# Per la ricerca a costo uniforme si attribuisca un valore di costo a scelta diverso alle azioni.
+# Si consiglia di strutturare il programma in modo tale che Ie diverse strategie siano implementabili con
+# semplici modifiche della struttura di base
+
 from mondoDeiBlocchi.funzioniSupportoMondoBlocchi import *
 from solitarioCinese.funzioniSupportoSolitarioCinese import *
 from algoritmi.dfs import solve_dfs
@@ -6,7 +29,7 @@ from algoritmi.bfs import solve_bfs
 from algoritmi.deepening import solve_deepening
 from algoritmi.uniform import solve_ucs
 
-numeroBlocchi = 4 #da mettere poi random, iniziamo con 4 per vedere se funziona
+numeroBlocchi = 4 #numero blocchi di partenza
 
 if __name__ == '__main__':
 	print "################## Mondo dei Blocchi ##########################"
@@ -18,8 +41,8 @@ if __name__ == '__main__':
 	goal = creaGoal(deepcopy(tavolo), numeroBlocchi)
 	print "Goal finale: ", goal
 	mondo = {'tavolo': tavolo, 'braccioSx': (), 'braccioDx': ()}
-	# print 'mondo: ', mondo
 	print
+
 	funzSuccessori = [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx]
 	print "TEST DFS"
 	print solve_dfs(mondo, checkFinito, goal, funzSuccessori)
@@ -72,28 +95,3 @@ if __name__ == '__main__':
 #CASO CON GOAL NON VALIDO
 # {'tavolo': [[(7, 16)], [(5, 19)], [(2, 5)], [(8, 12)], [(6, 15)]], 'braccioDx': (), 'braccioSx': ()},
 # {'tavolo': [[(7, 16), (5, 19), (2, 5), (8, 12)], [(6, 15)]], 'braccioDx': (), 'braccioSx': ()}]
-
-
-
-
-#TESTO
-# Esonero n.1 Ricerca nello Spazi degli Stati
-# Il progetto consiste nel realizzare un ambiente in cui venga realizzata la ricerca nello spazio degli stati,
-# per il problema PegSolitarie e per il problema scelto sulla piattaforma estudium e descritto di seguito.
-# Il candidato dovra’ realizzare la ricerca nello spazio degli stati per il problema scelto implementando le
-# seguenti strategie:
-# ricerca in ampiezza
-# ricerca in profondita
-# ricerca approfondimento iterative
-# ricerca a costo uniforme
-# il programma prendera’ in input stato iniziale e goal e dovra’ produrre il piano soluzione (cioe’ la
-# sequenza di azioni) o eventualemente fornire l’indicazione che non esistono soluzioni. Oltre alla
-# soluzione, Si richiedono in output statistiche sull’esecuzione (numero nodi generati, profondita’
-# raggiunta etc.).
-# Il candidato dovra’ provare il programma su piu’ istanze di problema di dimensioni diverse e dovra’
-# essere possibile per il docente modificare stato iniziale e goal. In particolare si richiede: almeno 2
-# problemi con soluzione di lunghezza breve, 1 probema con piano soluzione di lunghezza medio/lunga, 1
-# problema senza soluzioni risolto correttamente.
-# Per la ricerca a costo uniforme si attribuisca un valore di costo a scelta diverso alle azioni.
-# Si consiglia di strutturare il programma in modo tale che Ie diverse strategie siano implementabili con
-# semplici modifiche della struttura di base

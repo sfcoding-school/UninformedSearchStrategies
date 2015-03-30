@@ -1,3 +1,8 @@
+# BFS ITERATIVA
+# si ha un while true in cui il codice gira, da cui si puo' uscire solo se: 
+# - e' stata trovata una soluzione valida ( funzControlloGoal(head, goal) == True )
+# - ho provato ogni possibile stato e nessuno e' la soluzione ( len(queue) == 0 )
+# Differenza da DFS: i nodi successori vengono inseriti in coda alla coda ( queue.append([successore] + fringe) )
 def solve_bfs(mondo, funzControlloGoal, goal, funzioniSuccessori):
 	queue = [[mondo]]
 	visited = []

@@ -1,3 +1,8 @@
+# DEEPENING SEARCH ITERATIVA
+# si ha un while true in cui il codice gira, da cui si puo' uscire solo se: 
+# - la variabile 'go_on == False' ovvero ho superato la distanza massima a cui potevo
+#		arrivare in questa iterazione
+# - e' stata trovata una soluzione valida ( funzControlloGoal(head, goal) == True )
 def solve_deepening(mondo, funzControlloGoal, goal, funzioniSuccessori):
 	iteration = 0
 	while True:

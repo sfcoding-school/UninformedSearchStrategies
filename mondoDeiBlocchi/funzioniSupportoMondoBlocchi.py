@@ -1,37 +1,39 @@
 from random import randint
 from copy import deepcopy
 
+# crea un tavolo con numero di blocchi fissato e coppie p_i, M_i casuali
 def creaTavolo(numeroBlocchi):
 	tavoloTemp = []
 	for x in xrange(0, numeroBlocchi):
 		tavoloTemp.append([(randint(1,9), randint(1,20))]) # coppia p_i (peso), M_i (quanto puo' reggere)
 	return tavoloTemp
 
-# lst[1:] rest of the elements in the list, after the first
+
+# questa funzione controlla se una torre puo' esistere o 'crollerebbe'
 def  checkTorre(torreRverse, pesoAttuale):
-    if not torreRverse: # base case: list is empty
+    if not torreRverse: # caso base: la lista e' vuota quindi torno vero
         return True
     elif torreRverse[0][1] >= pesoAttuale :
-        return checkTorre(torreRverse[1:], pesoAttuale + torreRverse[0][0]) # recursive case: advance to next element in list
+        return checkTorre(torreRverse[1:], pesoAttuale + torreRverse[0][0]) # lst[1:] ritorna il resto della lista escluso il primo elemento
     else:
     	return False
 
-# da ricontrollare
+# Crea un goal casuale a partire dal mondo inziale
+# di base crea meno torri possibili utilizzando gli oggetti da destra verso sinistra
 def creaGoal(mondo, numeroBlocchi):
 	goalTemp = []
 	pesoAttuale = 0
 	torre = []
 	for x in xrange(0,numeroBlocchi):
-		if checkTorre((torre + mondo[x])[::-1], 0):
+		if checkTorre((torre + mondo[x])[::-1], 0): # [::-1] serve per invertire la lista
 			torre += mondo[x]
-		else:
+		else: 						 # se la torre non puo' sostenere un ulteriore oggetto se ne crea una nuova
 			goalTemp.append(torre)
 			torre = mondo[x]
 	goalTemp.append(torre)
 	return goalTemp
 
 #MOSSE POSSIBILI
-# PutDown(X) braccio sx
 def putDownDx(mondo):
 	if mondo['braccioSx'] != ():
 		dict2 = deepcopy(mondo)
@@ -41,7 +43,6 @@ def putDownDx(mondo):
 	else:
 		return False
 
-# PutDown(X) braccio dx
 def putDownSx(mondo):
 	if mondo['braccioDx'] != ():
 		dict2 = deepcopy(mondo)
@@ -51,7 +52,6 @@ def putDownSx(mondo):
 	else:
 		return False
 
-# AfferraSx(X)
 def afferraSx(mondo):
 	generati = []
 	if mondo['braccioSx'] == ():

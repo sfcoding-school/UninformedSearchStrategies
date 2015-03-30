@@ -1,3 +1,7 @@
+# UNIFORM COST SEARCH ITERATIVA
+# a differenza degli altri algoritmi questo espande il nodo con costo minore
+# viene infatti fatto un ordinamento, tramite heap-sort per ridurre i costi
+# in questo caso la struttura dati della coda e' formata da coppie costo-listaNodi
 def solve_ucs(mondo, funzControlloGoal, goal, costi, funzioniSuccessori):
     queue = [([mondo],0)]
     visited = []
@@ -25,7 +29,7 @@ def solve_ucs(mondo, funzControlloGoal, goal, costi, funzioniSuccessori):
 				print "UCS - profondita max raggiunta: ", c_depth
 				return fringe[0][::-1]
 			else:
-				i = 0
+				i = 0 # variabile che serve per scorrere i costi delle funzioni mossa
 				for function in funzioniSuccessori:
 					nodiSuccessori = function(head)
 					if nodiSuccessori != False: # se uguale a False quella mossa non era possibile

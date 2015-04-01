@@ -85,8 +85,9 @@ def print_sol_File(fringe, whichAlg):
     file = open(fname, 'w')
     file.write("\n")
     stack = ""
-    for j in range(0, len(fringe[0])+1):
-            stack += " -"
+    if fringe != []:
+        for j in range(0, len(fringe[0])+1):
+                stack += " -"
     for i in fringe:
         file.write(stack + "\n")
         for j in i:

@@ -13,6 +13,7 @@ def solve_deepening(mondo, funzControlloGoal, goal, funzioniSuccessori):
 		c_vis = 0
 		c_depth = 0
 		go_on = False
+		print len(queue) #TEST
 		while len(queue)!= 0:
 			fringe = queue[0]
 			queue = queue[1:]
@@ -20,6 +21,15 @@ def solve_deepening(mondo, funzControlloGoal, goal, funzioniSuccessori):
 			c_vis += 1
 			c_depth = max(c_depth,len(fringe))
 			visited.append(head)
+
+			#TEST
+			print fringe
+			print queue
+			print head
+			print visited
+			print iteration, ">", len(fringe)
+			raw_input()
+
 			if funzControlloGoal(head, goal):
 				print "Iterative Deepening - SOLUZIONE: "
 				print "Iterative Deepening - Nodi Generati: ", c_gen

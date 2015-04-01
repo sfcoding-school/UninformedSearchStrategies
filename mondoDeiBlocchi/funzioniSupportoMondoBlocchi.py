@@ -6,7 +6,7 @@ import os
 def creaTavolo(numeroBlocchi):
 	tavoloTemp = []
 	for x in xrange(0, numeroBlocchi):
-		tavoloTemp.append([(randint(1,9), randint(10,20))]) # coppia p_i (peso), M_i (quanto puo' reggere)
+		tavoloTemp.append([(randint(10,20), randint(10,20))]) # coppia p_i (peso), M_i (quanto puo' reggere)
 	return tavoloTemp
 
 

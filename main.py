@@ -29,7 +29,7 @@ from algoritmi.bfs import solve_bfs
 from algoritmi.deepening import solve_deepening
 from algoritmi.uniform import solve_ucs
 
-numeroBlocchi = 4 #numero blocchi di partenza (serve per random)
+numeroBlocchi = 2 #numero blocchi di partenza (serve per random)
 
 if __name__ == '__main__':
 	print "################## Mondo dei Blocchi ##########################"
@@ -46,24 +46,19 @@ if __name__ == '__main__':
 	funzSuccessori = [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx]
 	costi = (8,8,4,4,2,2) #COSTI(putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx)
 
-	# Stampa anche mosse soluzioni
-	# print "TEST DFS"
-	# print solve_dfs(mondo, checkFinito, goal, funzSuccessori)
-	# print "TEST BFS"
-	# print solve_bfs(mondo, checkFinito, goal, funzSuccessori)
-	# print "TEST DEEPENING"
-	# print solve_deepening(mondo, checkFinito, goal, funzSuccessori)
-	# print "TEST UCS"
-	# print solve_ucs(mondo, checkFinito, goal, costi, funzSuccessori)
+	#CASO CON GOAL NON VALIDO
+	mondo = {'tavolo': [[(7, 16)], [(5, 19)], [(2, 5)], [(8, 12)]], 'braccioDx': (), 'braccioSx': ()}
+	goal = [[(7, 16), (5, 19), (2, 5), (8, 12)]]
 
-	# Stampa solamente statistiche
-	solve_dfs(mondo, checkFinito, goal, funzSuccessori)
+
+	# TEST ALGORITMI
+	testStampa(solve_dfs(mondo, checkFinito, goal, funzSuccessori), "soluzioni/MondoBlocchi-DFS.txt")
 	print
-	solve_bfs(mondo, checkFinito, goal, funzSuccessori)
+	testStampa(solve_bfs(mondo, checkFinito, goal, funzSuccessori), "soluzioni/MondoBlocchi-BFS.txt")
 	print
-	solve_deepening(mondo, checkFinito, goal, funzSuccessori)
+	testStampa(solve_deepening(mondo, checkFinito, goal, funzSuccessori), "soluzioni/MondoBlocchi-Deepening.txt")
 	print
-	solve_ucs(mondo, checkFinito, goal, costi, funzSuccessori)
+	testStampa(solve_ucs(mondo, checkFinito, goal, costi, funzSuccessori), "soluzioni/MondoBlocchi-UCS.txt")
 
 	# SOLITARIO CINESE
 	print
@@ -94,25 +89,15 @@ if __name__ == '__main__':
 
 	funzSuccessori = [move_down, move_up, move_left, move_right]
 	costi = (1,3,2,0)
-	# Stampa anche mosse soluzioni
-	# print "DFS"
-	# print_sol(solve_dfs(game_e1, checkFinitoSolitario, goalSC, funzSuccessori))
-	# print "BFS"
-	# print_sol(solve_bfs(game_e1, checkFinitoSolitario, goalSC, funzSuccessori))
-	# print "DEEPENING"
-	# print_sol(solve_deepening(game_e1, checkFinitoSolitario, goalSC, funzSuccessori))
-	# print "UCS"
-	# print_sol(solve_ucs(game_e1, checkFinitoSolitario, goalSC, costi, funzSuccessori))
-
-	# Stampa solamente statistiche
-	funzSuccessori = [move_down, move_up, move_left, move_right]
-	solve_dfs(game_e1, checkFinitoSolitario, goalSC, funzSuccessori)
+	
+	# TEST ALGORITMI
+	print_sol_File(solve_dfs(game_e1, checkFinitoSolitario, goalSC, funzSuccessori), "soluzioni/SolitarioCinese-DFS.txt")
 	print
-	solve_bfs(game_e1, checkFinitoSolitario, goalSC, funzSuccessori)
+	print_sol_File(solve_bfs(game_e1, checkFinitoSolitario, goalSC, funzSuccessori), "soluzioni/SolitarioCinese-BFS.txt")
 	print
-	solve_deepening(game_e1, checkFinitoSolitario, goalSC, funzSuccessori)
+	print_sol_File(solve_deepening(game_e1, checkFinitoSolitario, goalSC, funzSuccessori), "soluzioni/SolitarioCinese-Deepening.txt")
 	print
-	solve_ucs(game_e1, checkFinitoSolitario, goalSC, costi, funzSuccessori)
+	print_sol_File(solve_ucs(game_e1, checkFinitoSolitario, goalSC, costi, funzSuccessori), "soluzioni/SolitarioCinese-UCS.txt")
 
 #CASO LUNGO
 # {'tavolo': [[(7, 16)], [(5, 19)], [(2, 5)], [(8, 12)], [(6, 15)]], 'braccioDx': (), 'braccioSx': ()},
@@ -122,3 +107,4 @@ if __name__ == '__main__':
 #CASO CON GOAL NON VALIDO
 # {'tavolo': [[(7, 16)], [(5, 19)], [(2, 5)], [(8, 12)], [(6, 15)]], 'braccioDx': (), 'braccioSx': ()},
 # {'tavolo': [[(7, 16), (5, 19), (2, 5), (8, 12)], [(6, 15)]], 'braccioDx': (), 'braccioSx': ()}]
+

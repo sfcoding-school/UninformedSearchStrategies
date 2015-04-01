@@ -25,6 +25,7 @@ def solve_deepening(mondo, funzControlloGoal, goal, funzioniSuccessori):
 				print "Iterative Deepening - Nodi Generati: ", c_gen
 				print "Iterative Deepening - Nodi Visitati: ", c_vis
 				print "Iterative Deepening - Massima profondita' raggiunta: ", c_depth
+				print "Iterative Deepening - Soluzione in ", len(fringe), " passi"
 				return fringe[::-1]
 			else:
 				for function in funzioniSuccessori:

@@ -1,4 +1,5 @@
 from copy import deepcopy
+import os
 
 def checkFinitoSolitario(head, goal):
     if head == goal:
@@ -60,19 +61,37 @@ def move_right(head):
                     generati.append(temp)
     return generati
 
-# Funzione che stampa la soluzione
+# Funzione che stampa la soluzione su terminale
 def print_sol(fringe):
     print
+    stack = ""
+    for j in range(0, len(fringe[0])+1):
+        stack += " -"
     for i in fringe:
-        for j in range(0, len(i)+2):
-            print "-",
-        print
+        print stack
         for j in i:
             print "|",
             for k in j:
                 print str(k),
             print "|"
-        for j in range(0, len(i)+2):
-            print "-",
+        print stack
         print
-        print
+
+# Funzione che stampa la soluzione su file
+def print_sol_File(fringe, whichAlg):
+    if not os.path.exists("soluzioni"):
+        os.makedirs("soluzioni")
+    fname = whichAlg
+    file = open(fname, 'w')
+    file.write("\n")
+    stack = ""
+    for j in range(0, len(fringe[0])+1):
+            stack += " -"
+    for i in fringe:
+        file.write(stack + "\n")
+        for j in i:
+            file.write("|")
+            for k in j:
+                file.write(" " + str(k))
+            file.write(" |\n")
+        file.write(stack + "\n\n")

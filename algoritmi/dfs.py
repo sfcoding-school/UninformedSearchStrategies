@@ -28,6 +28,7 @@ def solve_dfs(mondo, funzControlloGoal, goal, funzioniSuccessori):
 				print "DFS - Nodi generati: ", c_gen
 				print "DFS - Nodi visitati: ", c_vis
 				print "DFS - Massima profondita' raggiunta: ", c_depth
+				print "DFS - Soluzione in ", len(fringe), " passi"
 				return fringe[::-1]
 			else:
 				for function in funzioniSuccessori:

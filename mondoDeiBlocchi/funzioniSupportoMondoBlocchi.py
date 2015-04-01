@@ -1,11 +1,12 @@
 from random import randint
 from copy import deepcopy
+import os
 
 # crea un tavolo con numero di blocchi fissato e coppie p_i, M_i casuali
 def creaTavolo(numeroBlocchi):
 	tavoloTemp = []
 	for x in xrange(0, numeroBlocchi):
-		tavoloTemp.append([(randint(1,9), randint(1,20))]) # coppia p_i (peso), M_i (quanto puo' reggere)
+		tavoloTemp.append([(randint(1,9), randint(10,20))]) # coppia p_i (peso), M_i (quanto puo' reggere)
 	return tavoloTemp
 
 
@@ -116,3 +117,43 @@ def checkFinito(head, goal):
 	if head['tavolo'] == goal:
 		return True
 	return False
+
+def testStampa(listaSoluzione, whichAlg):
+	if not os.path.exists("soluzioni"):
+		os.makedirs("soluzioni")
+	fname = whichAlg
+	file = open(fname, 'w')
+	file.write("\n")
+	for passo in listaSoluzione:
+		altezzaMaxTorre = 0
+		for torri in passo['tavolo']:
+			if len(torri) > altezzaMaxTorre:
+				altezzaMaxTorre = len(torri)
+		matrix = [[0]*len(passo['tavolo']) for i in range(altezzaMaxTorre)]
+		colonna = 0
+		for torri in passo['tavolo']:
+			riga = altezzaMaxTorre-1
+			for obj in torri:
+				matrix[riga][colonna] = obj
+				riga -= 1
+			colonna += 1
+
+		stack2 = ""
+		for i in matrix:
+			for j in i:
+				if j != 0:
+					stack2 += "| " + str(j[0]) + "," + str(j[1]) + " |  "
+			file.write(stack2 + "\n")
+			stack2 = ""
+
+		stack2 = "braccioSx: "
+		if passo['braccioSx'] == ():
+			stack2 += "   " +  " braccioDx: "
+		else:
+			stack2 += str(passo['braccioSx']) +  " braccioDx: "
+		if passo['braccioDx'] == ():
+			stack2 += "   "
+		else:
+			stack2 += str(passo['braccioDx'])
+		file.write(stack2 + "\n\n")
+	file.close()

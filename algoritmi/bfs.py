@@ -28,6 +28,7 @@ def solve_bfs(mondo, funzControlloGoal, goal, funzioniSuccessori):
 				print "BFS - Nodi Generati: ", c_gen
 				print "BFS - Nodi Visitati: ", c_vis
 				print "BFS - Massima profondita' raggiunta: ", c_depth
+				print "BFS - Soluzione in ", len(fringe), " passi"
 				return fringe[::-1]
 			else:
 				for function in funzioniSuccessori:

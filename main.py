@@ -59,7 +59,7 @@ if __name__ == '__main__':
 	print
 	testStampa(solve_bfs(mondo, checkFinito, goal, funzSuccessori), "soluzioni/MondoBlocchi-BFS.txt")
 	print
-	#testStampa(solve_deepening(mondo, checkFinito, goal, funzSuccessori), "soluzioni/MondoBlocchi-Deepening.txt")
+	testStampa(solve_deepening(mondo, checkFinito, goal, funzSuccessori), "soluzioni/MondoBlocchi-Deepening.txt")
 	print
 	testStampa(solve_ucs(mondo, checkFinito, goal, costi, funzSuccessori), "soluzioni/MondoBlocchi-UCS.txt")
 

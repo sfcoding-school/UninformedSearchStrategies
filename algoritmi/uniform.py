@@ -28,7 +28,7 @@ def solve_ucs(mondo, funzControlloGoal, goal, costi, funzioniSuccessori):
 				print "UCS - numero di nodi visitati: ", c_vis
 				print "UCS - profondita max raggiunta: ", c_depth
 				print "UCS - Soluzione in ", len(fringe[0]), " passi"
-				return fringe[0][::-1]   
+				return fringe[0][::-1]
 			else:
 				i = 0 # variabile che serve per scorrere i costi delle funzioni mossa
 				for function in funzioniSuccessori:

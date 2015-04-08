@@ -29,30 +29,34 @@ from algoritmi.bfs import solve_bfs
 from algoritmi.deepening import solve_deepening
 from algoritmi.uniform import solve_ucs
 
-numeroBlocchi = 2 #numero blocchi di partenza (serve per random)
+numeroBlocchi = 4 #numero blocchi di partenza (serve per random)
 
 if __name__ == '__main__':
 	print "################## Mondo dei Blocchi ##########################"
+	print
 	# uno stato e' formato da {'tavolo': #lista di liste di ogni posizione del tavolo#,
 	#						   'braccioSx': #elemento presente sul braccio sinistro#,
 	#						   'braccioDx': #elemento presente sul braccio destro# }
+	
 	tavolo = creaTavolo(numeroBlocchi)
-	print "Tavolo iniziale: ", tavolo
 	goal = creaGoal(deepcopy(tavolo), numeroBlocchi)
-	print "Goal finale: ", goal
 	mondo = {'tavolo': tavolo, 'braccioSx': (), 'braccioDx': ()}
-	print
-
+	
 	funzSuccessori = [putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx]
-	costi = (8,8,4,4,2,2) #COSTI(putOnSx, putOnDx, afferraDx, afferraSx, putDownSx, putDownDx)
+	costi = (8,8,4,4,2,2)
 
 	#CASO CON GOAL NON VALIDO
-	mondo = {'tavolo': [[(7, 16)], [(5, 19)], [(2, 5)], [(8, 12)]], 'braccioDx': (), 'braccioSx': ()}
-	goal = [[(7, 16), (5, 19), (2, 5), (8, 12)]]
+	#mondo = {'tavolo': [[(7, 16)], [(5, 19)], [(2, 5)], [(8, 12)]], 'braccioDx': (), 'braccioSx': ()}
+	#goal = [[(7, 16), (5, 19), (2, 5), (8, 12)]]
 
-	mondo = {'tavolo': [[(15, 10)], [(15, 11)]], 'braccioDx': (), 'braccioSx': ()}
-	goal = [[(15, 10), (15, 11)]]
+	#CASO LUNGO (BFS e UCS lente) #10min alle 14.24
+	#mondo = {'tavolo': [[(7, 16)], [(5, 19)], [(2, 5)], [(8, 12)], [(6, 15)]], 'braccioDx': (), 'braccioSx': ()}
+	#goal = [[(7, 16), (5, 19), (2, 5)], [(8, 12), (6, 15)]]
 
+	print "Tavolo iniziale: ", tavolo
+	print "Goal finale: ", goal
+	print
+	
 
 	# TEST ALGORITMI
 	testStampa(solve_dfs(mondo, checkFinito, goal, funzSuccessori), "soluzioni/MondoBlocchi-DFS.txt")
@@ -67,22 +71,13 @@ if __name__ == '__main__':
 	print
 	print "################## Solitario Cinese ##########################"
 
-	# game_e1=[[" "," ",1,1,0," "," "],
-	# 		[" "," ",0,1,1," "," "],
-	# 		[0,0,0,0,0,0,0],
-	# 		[0,0,0,1,1,0,0],
-	# 		[0,0,0,0,0,1,0],
-	# 		[" "," ",0,0,0," "," "],
-	# 		[" "," ",0,0,0," "," "]]
-
-	game_e1=[[" "," ",0,0,0," "," "],
-			[" "," ",0,0,0," "," "],
+	game_e1=[[" "," ",1,1,0," "," "],
+			[" "," ",0,1,1," "," "],
 			[0,0,0,0,0,0,0],
-			[1,0,0,0,0,0,1],
-			[0,0,0,0,0,0,0],
+			[0,0,0,1,1,0,0],
+			[0,0,0,0,0,1,0],
 			[" "," ",0,0,0," "," "],
 			[" "," ",0,0,0," "," "]]
-
 
 	goalSC=[[" "," ",0,0,0," "," "],
 			[" "," ",0,0,0," "," "],
@@ -110,13 +105,3 @@ if __name__ == '__main__':
 	print_sol_File(solve_deepening(game_e1, checkFinitoSolitario, goalSC, funzSuccessori), "soluzioni/SolitarioCinese-Deepening.txt")
 	print
 	print_sol_File(solve_ucs(game_e1, checkFinitoSolitario, goalSC, costi, funzSuccessori), "soluzioni/SolitarioCinese-UCS.txt")
-
-#CASO LUNGO
-# {'tavolo': [[(7, 16)], [(5, 19)], [(2, 5)], [(8, 12)], [(6, 15)]], 'braccioDx': (), 'braccioSx': ()},
-# {'tavolo': [[(7, 16), (5, 19), (2, 5)], [(8, 12), (6, 15)]], 'braccioDx': (), 'braccioSx': ()}]
-# bfs lenta ma altre veloci
-
-#CASO CON GOAL NON VALIDO
-# {'tavolo': [[(7, 16)], [(5, 19)], [(2, 5)], [(8, 12)], [(6, 15)]], 'braccioDx': (), 'braccioSx': ()},
-# {'tavolo': [[(7, 16), (5, 19), (2, 5), (8, 12)], [(6, 15)]], 'braccioDx': (), 'braccioSx': ()}]
-

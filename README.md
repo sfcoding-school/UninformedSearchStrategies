@@ -20,10 +20,11 @@ reggere quanti blocchi si vogliono.
 An uninformed (a.k.a. blind, brute-force) search algorithm generates the search tree without using any domain specific knowledge.
 
 ##The search problem
-**State space** S : all valid configurations
-**Initial states** (nodes) I: subset of S
-**Goal states** G: subset of S
-**Successor function** succs(s) is subset of S : states reachable in one step (one arc) from s
+* **State space** S : all valid configurations
+* **Initial states** (nodes) I: subset of S
+* **Goal states** G: subset of S
+* **Successor function** succs(s) is subset of S : states reachable in one step (one arc) from s
+
 The search problem: find a solution path from a state in I to a state in G
 
 ###Algorithms

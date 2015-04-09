@@ -21,7 +21,7 @@ def solve_dfs(mondo, funzControlloGoal, goal, funzioniSuccessori):
 			queue = queue[1:] # toglie dalla lista il primo
 			head = fringe[0]
 			c_vis += 1
-			c_depth = max(c_depth,len(fringe))
+			c_depth = max(c_depth, len(fringe))
 			visited.append(head)
 			if funzControlloGoal(head, goal):
 				print "DFS - SOLUZIONE: "

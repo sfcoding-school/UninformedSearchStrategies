@@ -1,5 +1,7 @@
 # -*- coding: latin-1 -*-
 
+# Federico Corò (276964) - Lorenzo Paciotti (280046) 
+
 #TESTO
 # Esonero n.1 Ricerca nello Spazi degli Stati
 # Il progetto consiste nel realizzare un ambiente in cui venga realizzata la ricerca nello spazio degli stati,
@@ -38,6 +40,7 @@ if __name__ == '__main__':
 	#						   'braccioSx': #elemento presente sul braccio sinistro#,
 	#						   'braccioDx': #elemento presente sul braccio destro# }
 	
+	# Creo tavolo iniziale random e goal valido
 	tavolo = creaTavolo(numeroBlocchi)
 	goal = creaGoal(deepcopy(tavolo), numeroBlocchi)
 	mondo = {'tavolo': tavolo, 'braccioSx': (), 'braccioDx': ()}
@@ -49,16 +52,19 @@ if __name__ == '__main__':
 	#mondo = {'tavolo': [[(7, 16)], [(5, 19)], [(2, 5)], [(8, 12)]], 'braccioDx': (), 'braccioSx': ()}
 	#goal = [[(7, 16), (5, 19), (2, 5), (8, 12)]]
 
-	#CASO LUNGO (BFS e UCS lente) #10min alle 14.24
-	#mondo = {'tavolo': [[(7, 16)], [(5, 19)], [(2, 5)], [(8, 12)], [(6, 15)]], 'braccioDx': (), 'braccioSx': ()}
-	#goal = [[(7, 16), (5, 19), (2, 5)], [(8, 12), (6, 15)]]
+	#CASO LUNGO (BFS e UCS lente)
+	#mondo = {'tavolo': [[(7, 16)], [(5, 19)], [(2, 5)], [(8, 12)]], 'braccioDx': (), 'braccioSx': ()}
+	#goal = [[(7, 16), (5, 19), (2, 5)], [(8, 12)]]
 
-	print "Tavolo iniziale: ", tavolo
+	mondo = {'tavolo': [[(1, 90)], [(2, 91), (3, 92), (4, 93)]], 'braccioDx': (), 'braccioSx': ()}
+	goal = [[(4, 93), (3, 92), (2, 91), (1, 90)]]
+
+	print "Tavolo iniziale: ", mondo
 	print "Goal finale: ", goal
 	print
 	
 
-	# TEST ALGORITMI
+	# TEST ALGORITM
 	testStampa(solve_dfs(mondo, checkFinito, goal, funzSuccessori), "soluzioni/MondoBlocchi-DFS.txt")
 	print
 	testStampa(solve_bfs(mondo, checkFinito, goal, funzSuccessori), "soluzioni/MondoBlocchi-BFS.txt")

@@ -118,6 +118,7 @@ def checkFinito(head, goal):
 		return True
 	return False
 
+# puo' stampare male in caso di colonne ''invertite''
 def testStampa(listaSoluzione, whichAlg):
 	if not os.path.exists("soluzioni"):
 		os.makedirs("soluzioni")

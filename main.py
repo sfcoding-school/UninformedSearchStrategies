@@ -49,15 +49,15 @@ if __name__ == '__main__':
 	costi = (8,8,4,4,2,2)
 
 	#CASO CON GOAL NON VALIDO
-	#mondo = {'tavolo': [[(7, 16)], [(5, 19)], [(2, 5)], [(8, 12)]], 'braccioDx': (), 'braccioSx': ()}
-	#goal = [[(7, 16), (5, 19), (2, 5), (8, 12)]]
+	mondo = {'tavolo': [[(7, 16)], [(5, 19)], [(2, 5)], [(8, 12)]], 'braccioDx': (), 'braccioSx': ()}
+	goal = [[(7, 16), (5, 19), (2, 5), (8, 12)]]
 
 	#CASO LUNGO (BFS e UCS lente)
 	#mondo = {'tavolo': [[(7, 16)], [(5, 19)], [(2, 5)], [(8, 12)]], 'braccioDx': (), 'braccioSx': ()}
 	#goal = [[(7, 16), (5, 19), (2, 5)], [(8, 12)]]
 
-	mondo = {'tavolo': [[(1, 90)], [(2, 91), (3, 92), (4, 93)]], 'braccioDx': (), 'braccioSx': ()}
-	goal = [[(4, 93), (3, 92), (2, 91), (1, 90)]]
+	#mondo = {'tavolo': [[(1, 90)], [(2, 91), (3, 92), (4, 93)]], 'braccioDx': (), 'braccioSx': ()}
+	#goal = [[(4, 93), (3, 92), (2, 91), (1, 90)]]
 
 	print "Tavolo iniziale: ", mondo
 	print "Goal finale: ", goal
